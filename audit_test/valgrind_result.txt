@@ -1,0 +1,25 @@
+casper@Nepal:~/codes/ice_config$ valgrind bin_test/ice_config_test 
+==10968== Memcheck, a memory error detector
+==10968== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==10968== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==10968== Command: bin_test/ice_config_test
+==10968== 
+GAME=ZERO_DATA
+background=WHITE
+color=green
+MONITOR=800x600
+KEYPAD=NULL
+
+
+Example get MONITOR 
+ Result:800x600 
+==10968== 
+==10968== HEAP SUMMARY:
+==10968==     in use at exit: 0 bytes in 0 blocks
+==10968==   total heap usage: 10 allocs, 10 frees, 613 bytes allocated
+==10968== 
+==10968== All heap blocks were freed -- no leaks are possible
+==10968== 
+==10968== For counts of detected and suppressed errors, rerun with: -v
+==10968== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
