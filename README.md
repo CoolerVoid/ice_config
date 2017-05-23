@@ -1,5 +1,5 @@
 # Ice_config
-Ice config is a library to load parameters of config files.
+Ice config is a tiny library to load parameters of config files... 
 
 To test:
 
