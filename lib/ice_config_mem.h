@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <time.h>
 #include <stdint.h>
-#define ICE_CONFIG_XFREE(x) ice_xfree((void **)&x); 
+#define ICE_CONFIG_XFREE(x) ice_config_xfree((void **)&x); 
 #define MUL_NO_OVERFLOW	((size_t)1 << (sizeof(size_t)*4))
 // set DEBUG ON
 #define BUGVIEW_ICE 1

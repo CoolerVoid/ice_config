@@ -28,7 +28,10 @@ char *ice_config_get(char *param_name, char *content)
         	pos =(int) (tmp - content); 
 
 	if(pos==0)
-		return " ";
+	{
+		ICE_CONFIG_XFREE(out);
+		return NULL;
+	}
 
 	pos+=len_param;
 	p+=pos;
