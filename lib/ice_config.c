@@ -55,46 +55,47 @@ char *ice_config_get(char *param_name, char *content)
 }
 
 
-char *ice_config_load(char * NameFile)
+char *ice_config_load(char * filename)
 {
-	FILE * fh;
-	static char buffer[MAX_file_len];
+    FILE *fp = fopen(filename, "r");
+    size_t file_size;
+    long pos;
+    char *file_contents;
 
-	memset(buffer,0,MAX_file_len);
+    	if (!fp)
+        	return NULL;
 
-	fh = fopen(NameFile, "rb");
+    	fseek(fp, 0L, SEEK_END);
+    	pos = ftell(fp);
 
-	if( fh == NULL )
+    	if (pos < 0) 
 	{
+        	fclose(fp);
+        	return NULL;
+    	}
 
-		ICE_CONFIG_DEBUG("error in to open() file");
-		perror("Error ");
-		exit(-1); 	 
-		
-	}
+    	file_size = pos;
+    	rewind(fp);
+    	file_contents = ice_config_xmallocarray((file_size + 1),sizeof(char));
 
-	if(fseek(fh, 0L, SEEK_END)==0)
+    	if (!file_contents) 
 	{
-    		long s = ftell(fh);
-    		rewind(fh);
+        	fclose(fp);
+        	return NULL;
+    	}
 
-    		if ( buffer != NULL && s < MAX_file_len )
-    		{
-      			if(!fread(buffer, s, 1, fh))
-				ICE_CONFIG_DEBUG("error \n");
-    		}
-	}
-
- 
-	if( fclose(fh) == EOF )
+    	if (fread(file_contents, file_size, 1, fp) < 1) 
 	{
-		ICE_CONFIG_DEBUG("Error in close() file %s",NameFile);
-		exit(1);
-	}
+        	if (ferror(fp)) 
+		{
+            		fclose(fp);
+            		ICE_CONFIG_XFREE(file_contents);
+            		return NULL;
+        	}
+    	}
 
-	fh=NULL;
+   	fclose(fp);
+    	file_contents[file_size] = '\0';
 
-	char *tmp=buffer;
-	
-	return tmp;
+    return file_contents;
 }
