@@ -14,5 +14,8 @@ int main()
 	free(var1_test);
 	var1_test=NULL;
 
+	free(content_test);
+	content_test=NULL;
+
 	return 0;
 }
